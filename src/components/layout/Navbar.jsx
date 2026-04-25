@@ -11,27 +11,27 @@ const Navbar = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Entrance: Fast, aggressive "power" ease
+      // 1. Entrance: Subtle slide down with a long fade
       const tl = gsap.timeline();
       tl.from([logoRef.current, ...linksRef.current], {
-        y: -15,
+        y: -10,
         opacity: 0,
-        duration: 1,
-        stagger: 0.05,
-        ease: "power4.out",
-        delay: 0.5
+        duration: 1.2,
+        stagger: 0.08,
+        ease: "power3.out",
+        delay: 0.2
       });
 
-      // 2. Scroll Logic: Smooth transition to dark glass
+      // 2. Scroll Animation: The 'Glass Reveal'
       gsap.to(navRef.current, {
-        backgroundColor: "rgba(0, 0, 0, 0.85)",
-        backdropFilter: "blur(20px)",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        backdropFilter: "blur(15px)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
         paddingTop: "1.25rem",
         paddingBottom: "1.25rem",
         scrollTrigger: {
           trigger: "body",
-          start: "top -20",
+          start: "top -30",
           toggleActions: "play none none reverse",
         }
       });
@@ -39,47 +39,50 @@ const Navbar = () => {
     return () => ctx.revert();
   }, []);
 
-return (
+  return (
     <nav 
       ref={navRef}
-      /* We use 'bg-gradient-to-b' to fade from a soft dark tint to total transparency */
-      className="fixed top-0 z-[100] w-full px-6 py-10 md:px-16 bg-gradient-to-b from-black/40 to-transparent"
+      /* Initial state is transparent with a soft gradient for contrast */
+      className="fixed top-0 z-[100] w-full px-6 py-8 md:px-16 bg-gradient-to-b from-black/50 to-transparent transition-all duration-700 ease-in-out"
     >
       <div className="mx-auto flex max-w-[1800px] items-center justify-between">
         
-        {/* Logo - It needs to be bold to stand out against the background */}
+        {/* Branding: Ultra-italic & heavy for impact */}
         <div 
           ref={logoRef}
-          className="cursor-pointer text-3xl font-black italic tracking-tighter text-white drop-shadow-lg"
+          className="cursor-pointer text-3xl font-black italic tracking-tighter text-white hover:opacity-80 transition-opacity"
         >
           DAVA
         </div>
 
-        {/* Links - We use a high 'tracking' and lowercase/uppercase mix for luxury vibes */}
+        {/* Navigation Links: Spaced out for high-fashion aesthetic */}
         <div className="hidden items-center gap-14 md:flex">
           {['The Drop', 'Collection', 'Archive'].map((link, i) => (
             <a 
               key={link}
               ref={el => linksRef.current[i] = el}
-              href={`#${link.toLowerCase()}`} 
-              className="text-[10px] font-medium uppercase tracking-[0.5em] text-white/90 hover:text-white transition-all hover:scale-105"
+              href={`#${link.toLowerCase().replace(' ', '-')}`} 
+              className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/60 hover:text-white transition-all hover:translate-y-[-1px]"
             >
               {link}
             </a>
           ))}
         </div>
 
-        {/* CTA - Remove the button borders for a cleaner look */}
-        <div className="flex items-center gap-10">
-          <button className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 hover:text-white transition-opacity">
+        {/* Functional Links */}
+        <div className="flex items-center gap-8">
+          <button className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/70 hover:text-white transition-opacity">
             Search
           </button>
-          <button className="bg-white px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-black hover:bg-zinc-200 transition-colors">
+          
+          {/* Cart Button: High-contrast white box */}
+          <button className="bg-white px-6 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] text-black hover:bg-zinc-200 transition-colors">
             Cart (0)
           </button>
         </div>
       </div>
     </nav>
-  );}
+  );
+};
 
 export default Navbar;

@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+@layer base {
+  * {
+    @apply border-white/10;
+  }
+  
+  html {
+    /* Critical for GSAP ScrollTrigger smoothness */
+    scroll-behavior: initial; 
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-black text-white overflow-x-hidden;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+  }
+
+  /* High-end Typography Rendering */
+  h1, h2, h3, h4 {
+    @apply tracking-tighter leading-none;
+  }
+}
+
+@layer components {
+  /* Minimalist Luxury Scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-800 transition-colors hover:bg-zinc-600;
+  }
+
+  /* Selection color for that "DAVA" brand feel */
+  ::selection {
+    @apply bg-white text-black;
+  }
+}
+
+/* Custom Utilities for the "Editorial" look */
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
+  }
+  
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+}

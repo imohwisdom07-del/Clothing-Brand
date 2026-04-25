@@ -1,11 +1,23 @@
 /* src/index.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-body {
-  margin: 0;
-  background-color: #000;
-  /* Prevents horizontal scrolling if an image is too wide */
-  overflow-x: hidden; 
+@layer base {
+  body {
+    @apply bg-black text-white selection:bg-white selection:text-black;
+    margin: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-black;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-700 hover:bg-zinc-600;
+  }
 }
