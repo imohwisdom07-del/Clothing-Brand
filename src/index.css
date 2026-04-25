@@ -1,0 +1,11 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background-color: #000;
+  /* Prevents horizontal scrolling if an image is too wide */
+  overflow-x: hidden; 
+}
